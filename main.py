@@ -4,7 +4,7 @@ from random import randint
 from time import sleep, time
 import pickle
 import os.path
-
+#2023.01.10
 
 def move_ship(event):
     key = event.keysym
