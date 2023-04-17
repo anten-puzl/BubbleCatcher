@@ -1,4 +1,4 @@
-# Mylo
+# BubbleCatcher
 
 Just a little game
 
