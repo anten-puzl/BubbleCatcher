@@ -1,12 +1,10 @@
 # Mylo
 
-Mylo is program for downloading attached files from email
+Just a little game
 
 ## Usage
 
-Run config.py to create config.ini
-
-Run main.py to download files
+Just run
 
 ## Contributing
 
