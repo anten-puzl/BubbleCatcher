@@ -4,7 +4,7 @@ from random import randint
 from time import sleep, time
 import pickle
 import os.path
-#2023.01.10_1
+
 
 def move_ship(event):
     key = event.keysym
@@ -127,12 +127,13 @@ while time() < end:
     clean_up_boobs()
     score += collision()
     if (int(score / BONUS_SCORE)) > bonus:
-        bonus +=1
+        bonus += 1
         end += TIME_LIMIT
     show_score(score)
-    show_time(int(end-time()))
+    show_time(int(end - time()))
     window.update()
     sleep(0.01)
+
 
 def Add_player_to_top():
     frame = Tk()
@@ -142,7 +143,7 @@ def Add_player_to_top():
     def InputName():
         inp = inputtxt.get(1.0, "end-1c")
         frame.destroy()
-        #read previous score
+        # read previous score
 
         pathtofile = 'c:/temp/top.txt'
         file_exists = os.path.exists(pathtofile)
@@ -152,58 +153,42 @@ def Add_player_to_top():
                 TopListNames = pickle.load(fp)
                 fp.close()
         else:
-            TopListNames=[]
+            TopListNames = []
 
-        #in each line we have name, score
-        NewlineOfScore = [inp,score]
+        # in each line we have name, score
+        NewlineOfScore = [inp, score]
         NeedToAddPlayer = True
-        for idList in range(len(TopListNames)-1,-1,-1):
+        for idList in range(len(TopListNames) - 1, -1, -1):
             LineOfScore = TopListNames[idList]
             if LineOfScore[0] == inp:
                 if LineOfScore[1] < score:
                     del TopListNames[idList]
                 else:
                     NeedToAddPlayer = False
-                f=0
+                f = 0
         if NeedToAddPlayer:
             TopListNames.append(NewlineOfScore)
-
 
         with open(r'c:/temp/top.txt', 'wb') as fp:
             pickle.dump(TopListNames, fp)
         fp.close()
-        # c.create_text(MID_X, MID_Y, \
-        #               text='GAME OVER', fill='white', font=('Helvetica', 30))
-        # c.create_text(MID_X, MID_Y + 30, \
-        #               text='Score:' + str(score), fill='white')
-        # c.create_text(MID_X, MID_Y + 45, \
-        #               text='Bonus time:' + str(bonus * TIME_LIMIT), fill='white')
         distance = 30
         position = 45
         for LineOfScore in TopListNames:
             playername = LineOfScore[0]
             playerscore = LineOfScore[1]
-            c.create_text(MID_X, MID_Y + position, text=playername + '\t'+str(playerscore), fill='blue', font=('Helvetica', 15))
+            c.create_text(MID_X, MID_Y + position, text=playername + '\t' + str(playerscore), fill='blue',
+                          font=('Helvetica', 15))
             position += distance
 
-
-
-    inputtxt = Text(frame,height = 5, width = 20)
+    inputtxt = Text(frame, height=5, width=20)
     inputtxt.pack()
     printButton = Button(frame,
-    text = "OK",command = InputName)
+                         text="OK", command=InputName)
     printButton.pack()
     lbl = Label(frame, text="")
     lbl.pack()
 
-   # frame.mainloop()
-
-
-
-
 
 Add_player_to_top()
-
-
-
 c.mainloop()
